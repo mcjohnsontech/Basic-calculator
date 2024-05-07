@@ -1,6 +1,15 @@
 body{
     margin: 0;
     padding: 0;
+}
+
+p{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+section.calculator{
+    padding-top: 2rem;
     display: flex;
     background-color: #000;
     justify-content: center;

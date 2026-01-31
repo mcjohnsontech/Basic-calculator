@@ -8,80 +8,78 @@ var subtraction = document.getElementById("subtraction");
 var display = document.getElementById("display");
 var collate = [];
 
+document.addEventListener("keydown", function (event) {
+  const key = event.key;
+
+  // Numbers
+  if (!isNaN(key)) {
+    appendToDisplay(key);
+  }
+
+  // Operators
+  else if (["+", "-", "*", "/"].includes(key)) {
+    mathsOperator(key);
+  }
+
+  // Decimal point
+  else if (key === ".") {
+    appendToDisplay(".");
+  }
+
+  // Enter key → calculate
+  else if (key === "Enter") {
+    event.preventDefault(); // stops form submit if inside form
+    totalFunc();
+  }
+
+  // Backspace → remove last character
+  else if (key === "Backspace") {
+    display.value = display.value.slice(0, -1);
+  }
+
+  // Escape → clear display
+  else if (key === "Escape") {
+    clearDisplay();
+  }
+});
+
 function appendToDisplay(input) {
   display.value += input;
   display.style.display = "inline";
 }
-function mathsOperator(tag) {
-  let chosenOne = display.value;
-  collate.push(chosenOne);
-  collate.push(tag);
-  console.log(collate);
-  display.value = "";
+function mathsOperator(operator) {
+  let lastChar = display.value.slice(-1);
+
+  // Prevent two operators in a row
+  if ("+-*/".includes(lastChar)) return;
+
+  // Convert × symbol to * for JavaScript
+  if (operator === "x") operator = "*";
+
+  display.value += operator;
 }
 
 function totalFunc() {
-  let choseSecond = display.value;
-  collate.push(choseSecond);
-  console.log(collate);
-  if (collate.includes("x")) {
-    let result = Number(collate[0]) * Number(collate[2]);
-    console.log(result);
-    display.value = result;
+  try {
+    let expression = display.value;
 
-    if (Number.isInteger(result) == false) {
-      let rounded = result.toFixed(3);
-      display.value = rounded;
-      if (isNaN(result) == true) {
-        display.value = 'Error, please reload page';
-      }
+    // Replace visual ÷ if you used it
+    expression = expression.replace(/÷/g, "/");
+
+    let result = eval(expression);
+
+    if (!isFinite(result)) {
+      display.value = "Math Error";
+    } else {
+      display.value = Number.isInteger(result)
+        ? result
+        : result.toFixed(3);
     }
+  } catch (error) {
+    display.value = "Error";
   }
-  if (collate.includes("-")) {
-    let result = Number(collate[0]) - Number(collate[2]);
-    console.log(result);
-    display.value = result;
+}
 
-    if (Number.isInteger(result) == false) {
-      let rounded = result.toFixed(3);
-      display.value = rounded;
-      if (isNaN(result) == true) {
-        display.value = 'Error, please reload page';
-      }
-    }
-  }
-  if (collate.includes("/")) {
-    let result = Number(collate[0]) / Number(collate[2]);
-    console.log(result);
-    display.value = result;
-
-    if (Number.isInteger(result) == false) {
-      let rounded = result.toFixed(3);
-      display.value = rounded;
-      if (isNaN(result) == true) {
-        display.value = 'Error, please reload page';
-      }
-    }
-  }
-  if (collate.includes("+")) {
-    let result = Number(collate[0]) + Number(collate[2]);
-    console.log(result);
-    display.value = result;
-
-    if (Number.isInteger(result) == false) {
-      let rounded = result.toFixed(3);
-      display.value = rounded;
-      if (isNaN(result) == true) {
-      display.value = 'Error, please reload page';
-    }
-    }
-
-  }
-
-  collate = [];
-
-  // addition.addEventListener("click", subFunc(addThem));
-  // division.addEventListener("click", subFunc('divd'));
-  // subtraction.addEventListener("click", subFunc(subThem));
-  // multiply.addEventListener("click", subFunc(mulThem));
+function clearDisplay() {
+  display.value = "";
 }

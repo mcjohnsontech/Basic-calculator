@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,100 +13,53 @@
     />
     <title>Calculator</title>
 
-    
-    <p><a href="https://github.com/mcjohnsontech/Basic-calculator">Click here to go to repo</a></p>
+    <p>
+      <a href="https://github.com/mcjohnsontech/Basic-calculator"
+        >Click here to go to repo</a
+      >
+    </p>
   </head>
   <body>
     <section class="calculator">
-       <table>
-      <tr>
-        <th colspan="4"><input type="text" value="" id="display" /></th>
-      </tr>
-      <tr>
-        <td>
-          <button onclick="appendToDisplay('7')" id="seven" class="combine">
-            7
-          </button>
-        </td>
-        <td>
-          <button id="eight" class="combine" onclick="appendToDisplay('8')">
-            8
-          </button>
-        </td>
-        <td>
-          <button id="nine" class="combine" onclick="appendToDisplay('9')">
-            9
-          </button>
-        </td>
-        <td>
-          <button id="divide" onclick="mathsOperator('/')">
-            &divide
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button id="four" class="combine" onclick="appendToDisplay('4')">
-            4
-          </button>
-        </td>
-        <td>
-          <button id="five" class="combine" onclick="appendToDisplay('5')">
-            5
-          </button>
-        </td>
-        <td>
-          <button id="six" class="combine" onclick="appendToDisplay('6')">
-            6
-          </button>
-        </td>
-        <td>
-          <button id="multiply" onclick="mathsOperator('x')">
-            &times
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button id="one" class="combine" onclick="appendToDisplay('1')">
-            1
-          </button>
-        </td>
-        <td>
-          <button id="two" class="combine" onclick="appendToDisplay('2')">
-            2
-          </button>
-        </td>
-        <td>
-          <button id="three" class="combine" onclick="appendToDisplay('3')">
-            3
-          </button>
-        </td>
-        <td>
-          <button id="subtraction" onclick="mathsOperator('-')">
-            &minus;
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button id="zero" class="combine" onclick="appendToDisplay('0')">
-            0
-          </button>
-        </td>
-        <td>
-          <button id="decimal_point combine" onclick="appendToDisplay('.')">
-            .
-          </button>
-        </td>
-        <td>
-          <button id="addition" onclick="mathsOperator('+')">&plus;</button>
-        </td>
-        <td><button id="total" onclick="totalFunc()">&equals;</button></td>
-      </tr>
-    </table>
+      <div class="display-wrapper">
+        <input
+          type="text"
+          id="display"
+          readonly
+          aria-label="Calculator display"
+        />
+      </div>
+
+      <div class="buttons">
+        <!-- Row 1 -->
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button class="operator" data-operator="/">÷</button>
+
+        <!-- Row 2 -->
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button class="operator" data-operator="*">×</button>
+
+        <!-- Row 3 -->
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button class="operator" data-operator="-">−</button>
+
+        <!-- Row 4 -->
+        <button data-value="0" class="zero">0</button>
+        <button data-value=".">.</button>
+        <button class="operator" data-operator="+">+</button>
+        <button id="equals">=</button>
+
+        <!-- Row 5 -->
+        <button id="clear" class="span-two">C</button>
+        <button id="backspace">⌫</button>
+      </div>
     </section>
-   
   </body>
 </html>
 <script src="./index.js"></script>
